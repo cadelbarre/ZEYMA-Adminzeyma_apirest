@@ -20,6 +20,8 @@ app.use(require('./src/routes/vendedores.routes'))
 app.use(require('./src/routes/checkIn.routes'))
 app.use(require('./src/routes/packIn.routes'))
 app.use(require('./src/routes/pedidosBorrador.routes'))
+app.use(require('./src/routes/bodega.routes'))
+app.use(require('./src/routes/logistica.routes'))
 
 app.listen(app.get('port'), () => {
   console.log('working in port', app.get('port'))

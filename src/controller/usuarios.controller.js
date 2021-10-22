@@ -5,6 +5,7 @@ const { searchUserData, searchHash } = require('../functions/usuarios')
 
 const authentication = async (req, res) => {
   const { username, password } = req.params
+
   const resp = await searchHash(username, password)
 
   if (resp.error) return res.json(resp) // Validamos si el user existe

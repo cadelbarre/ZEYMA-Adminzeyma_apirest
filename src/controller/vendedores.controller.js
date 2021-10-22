@@ -82,6 +82,7 @@ const updateOneSeller = async (req, res) => {
   const sellerInfoToUpdate = req.body
   const keySellerFields = Object.keys(sellerInfoToUpdate)
   const valuesSellerFields = Object.values(sellerInfoToUpdate)
+
   valuesSellerFields.push(placeholder[0])
   const element = keySellerFields.reduce((acc, el) => {
     acc += el + ' = ?, '

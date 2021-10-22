@@ -52,6 +52,18 @@ const nameOfAllClients = async (req, res) => {
     .catch((e) => res.status(500).json(sendResponse({ body: e, error: true, status: 500 })))
 }
 
+const nameOfAllClientsConcat = async (req, res) => {
+  const query =
+    "SELECT codigo, CONCAT(codigo,' - ', TRIM(nombre_drogueria), ' - ', TRIM(contacto)) AS nombre_completo FROM ListadoClientes WHERE codigo <> '' ORDER BY nombre_drogueria ASC"
+
+  await db.query(query)
+    .then((result) => {
+      if (Array.isArray(result[0]) && !result[0].length) res.status(404).json(sendResponse('ClientDoesntExist'))
+      else res.json(sendResponse({ body: result[0] }))
+    })
+    .catch((e) => res.status(500).json(sendResponse({ body: e, error: true, status: 500 })))
+}
+
 /**
  *Buscamos todos los datos de un cliente especifico en la tabla clientes.
  * @param {request} req - Obtenemos el codigo del cliente a través del req.params
@@ -73,5 +85,6 @@ module.exports = {
   allClients,
   clientsBySeller,
   nameOfAllClients,
+  nameOfAllClientsConcat,
   searchClientsByCode
 }
